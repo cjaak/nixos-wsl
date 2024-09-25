@@ -74,6 +74,7 @@
 in {
   imports = [
     nix-index-database.hmModules.nix-index
+    ./dots/starship/default.nix
   ];
 
   home.stateVersion = "22.11";
@@ -103,22 +104,6 @@ in {
     nix-index.enableFishIntegration = true;
     nix-index-database.comma.enable = true;
 
-    # FIXME: disable this if you don't want to use the starship prompt
-    starship.enable = true;
-    starship.settings = {
-      aws.disabled = true;
-      gcloud.disabled = true;
-      kubernetes.disabled = false;
-      git_branch.style = "242";
-      directory.style = "blue";
-      directory.truncate_to_repo = false;
-      directory.truncation_length = 8;
-      python.disabled = true;
-      ruby.disabled = true;
-      hostname.ssh_only = false;
-      hostname.style = "bold green";
-    };
-
     # FIXME: disable whatever you don't want
     fzf.enable = true;
     fzf.enableFishIntegration = true;
@@ -141,8 +126,8 @@ in {
         side-by-side = true;
         navigate = true;
       };
-      userEmail = "charlie.wiegand@sn-invent.de"; 
-      userName = "cwiegand"; 
+      userEmail = "charlie.wiegand@sn-invent.de";
+      userName = "cwiegand";
       extraConfig = {
         # FIXME: uncomment the next lines if you want to be able to clone private https repos
         # url = {
