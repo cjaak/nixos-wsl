@@ -183,6 +183,7 @@ in {
           + "/extras/kanagawa.fish")}
 
         set -U fish_greeting
+        fish_add_path --append /mnt/c/Users/cwiegand/AppData/Local/Microsoft/WinGet/Packages/equalsraf.win32yank_Microsoft.Winget.Source_8wekyb3d8bbwe/
       '';
       functions = {
         refresh = "source $HOME/.config/fish/config.fish";
