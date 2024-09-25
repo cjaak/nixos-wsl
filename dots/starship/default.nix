@@ -2,18 +2,76 @@
   programs.starship = {
     enable = true;
     settings = {
-      format = "[ ](bright-white)[ ](bold fg:black bg:bright-white)[](bg:red fg:bright-white)$nodejs$python[](fg:red bg:green)$git_branch$git_status[](fg:green bg:blue)$directory[](fg:blue)$fill$time\n$character";
-      aws.disabled = true;
-      gcloud.disabled = true;
-      kubernetes.disabled = false;
-      git_branch.style = "242";
-      directory.style = "blue";
-      directory.truncate_to_repo = false;
-      directory.truncation_length = 8;
-      python.disabled = true;
-      ruby.disabled = true;
-      hostname.ssh_only = false;
-      hostname.style = "bold green";
+      format = "[ ](bright-white)[ ](bold fg:black bg:bright-white)[](bg:purple fg:bright-white)$nodejs$python[](fg:purple bg:green)$git_branch$git_status[](fg:green bg:blue)$directory[](fg:blue)$fill[](fg:red)$username[ ](fg:yellow bg:red)$hostname[](fg:bright-white bg:yellow)$time[ ](fg:bright-white)\n$character";
+
+      fill = {
+        symbol = "-";
+        style = "fg:bright-black";
+      };
+
+      nodejs = {
+        style = "fg:black bg:purple";
+        symbol = "󰎙 ";
+        format = "[$symbol($version)]($style)";
+      };
+
+      python = {
+        style = "fg:black bg:purple";
+        format = "[$symbol$pyenv_prefix($version )(($virtualenv) )]($style)";
+        symbol = "  ";
+        pyenv_version_name = false;
+      };
+
+      character = {
+        success_symbol = "[  ](bold green)";
+        error_symbol = "[  ](bold red)";
+      };
+
+      directory = {
+        style = "fg:black bg:blue";
+        format = "[$path]($style)";
+        truncation_length = 5;
+        truncation_symbol = "󰉒 /";
+        home_symbol = "  ";
+        truncate_to_repo = false;
+      };
+
+      directory.substitutions = {
+        "Documents" = "󰈙 ";
+        "Downloads" = " ";
+        "Music" = " ";
+        "Pictures" = " ";
+      };
+
+      git_branch = {
+        symbol = "";
+        style = "bg:green";
+        format = "[[ $symbol $branch](fg:black bg:green)]($style)";
+      };
+
+      git_status = {
+        style = "bg:green";
+        format = "[[ ($all_status $ahead_behind)](fg:black bg:green)]($style)";
+      };
+
+      time = {
+        disabled = false;
+        time_format = "%R"; # 24-hour format for time
+        format = "[  $time](fg:black bg:bright-white)"; # Nix fix here
+      };
+
+      hostname = {
+        ssh_only = true;
+        format = "[󰌘 ](fg:black bg:yellow)[$ssh_symbol](fg:black bg:yellow)";
+        trim_at = "";
+        disabled = false;
+      };
+
+      username = {
+        format = "[ $user](bg:red fg:black)";
+        disabled = false;
+        show_always = true;
+      };
     };
   };
 }
