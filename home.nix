@@ -141,8 +141,8 @@ in {
         side-by-side = true;
         navigate = true;
       };
-      userEmail = ""; # FIXME: set your git email
-      userName = ""; #FIXME: set your git username
+      userEmail = "charlie.wiegand@sn-invent.de"; 
+      userName = "cwiegand"; 
       extraConfig = {
         # FIXME: uncomment the next lines if you want to be able to clone private https repos
         # url = {
@@ -224,8 +224,6 @@ in {
           gsl = "git stash list";
         };
       shellAliases = {
-        jvim = "nvim";
-        lvim = "nvim";
         pbcopy = "/mnt/c/Windows/System32/clip.exe";
         pbpaste = "/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -command 'Get-Clipboard'";
         explorer = "/mnt/c/Windows/explorer.exe";
