@@ -1,5 +1,4 @@
 {
-  # FIXME: uncomment the next line if you want to reference your GitHub/GitLab access tokens and other secrets
   # secrets,
   pkgs,
   username,
@@ -7,7 +6,6 @@
   ...
 }: let
   unstable-packages = with pkgs.unstable; [
-    # FIXME: select your core binaries that you always want on the bleeding-edge
     bat
     bottom
     coreutils
@@ -34,8 +32,6 @@
   ];
 
   stable-packages = with pkgs; [
-    # FIXME: customize these stable packages to your liking for the languages that you use
-
     # FIXME: you can add plugins, change keymaps etc using (jeezyvim.nixvimExtend {})
     # https://github.com/LGUG2Z/JeezyVim#extending
     jeezyvim
@@ -74,7 +70,7 @@
 in {
   imports = [
     nix-index-database.hmModules.nix-index
-    ./dots/starship/default.nix
+    ./dots/starship/gruvbox.nix
   ];
 
   home.stateVersion = "22.11";
@@ -84,7 +80,6 @@ in {
     homeDirectory = "/home/${username}";
 
     sessionVariables.EDITOR = "nvim";
-    # FIXME: set your preferred $SHELL
     sessionVariables.SHELL = "/etc/profiles/per-user/${username}/bin/fish";
   };
 
@@ -104,7 +99,6 @@ in {
     nix-index.enableFishIntegration = true;
     nix-index-database.comma.enable = true;
 
-    # FIXME: disable whatever you don't want
     fzf.enable = true;
     fzf.enableFishIntegration = true;
     lsd.enable = true;
@@ -129,15 +123,6 @@ in {
       userEmail = "charlie.wiegand@sn-invent.de";
       userName = "cwiegand";
       extraConfig = {
-        # FIXME: uncomment the next lines if you want to be able to clone private https repos
-        # url = {
-        #   "https://oauth2:${secrets.github_token}@github.com" = {
-        #     insteadOf = "https://github.com";
-        #   };
-        #   "https://oauth2:${secrets.gitlab_token}@gitlab.com" = {
-        #     insteadOf = "https://gitlab.com";
-        #   };
-        # };
         push = {
           default = "current";
           autoSetupRemote = true;
@@ -151,11 +136,8 @@ in {
       };
     };
 
-    # FIXME: This is my fish config - you can fiddle with it if you want
     fish = {
       enable = true;
-      # FIXME: run 'scoop install win32yank' on Windows, then add this line with your Windows username to the bottom of interactiveShellInit
-      # fish_add_path --append /mnt/c/Users/<Your Windows Username>/scoop/apps/win32yank/0.1.1
       interactiveShellInit = ''
         ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
 
@@ -192,6 +174,12 @@ in {
           "..." = "cd ../../";
           "...." = "cd ../../../";
           "....." = "cd ../../../../";
+        }
+        # wsl to windows shortcuts
+        // {
+          repos = "/mnt/c/Users/cwiegand/Repos";
+          docs = "/mnt/c/Users/cwiegand/Documents";
+          pics = "/mnt/c/Users/cwiegand/Pictures";
         }
         # git shortcuts
         // {
