@@ -66,11 +66,14 @@
     shellcheck
     shfmt
     statix # nix
+
+    httpie
   ];
 in {
   imports = [
     nix-index-database.hmModules.nix-index
     ./dots/starship/gruvbox.nix
+    ./dots/tmux/workflow.nix
   ];
 
   home.stateVersion = "22.11";
